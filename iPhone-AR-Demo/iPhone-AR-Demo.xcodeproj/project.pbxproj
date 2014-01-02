@@ -35,6 +35,7 @@
 		64F543131695DF09009F9468 /* bgCalloutDisclosure@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F5430B1695DF09009F9468 /* bgCalloutDisclosure@2x.png */; };
 		64F5431A1695E1ED009F9468 /* bgCallout.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F543181695E1ED009F9468 /* bgCallout.png */; };
 		64F5431B1695E1ED009F9468 /* bgCallout@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 64F543191695E1ED009F9468 /* bgCallout@2x.png */; };
+		B94B3C6B1875337C009B0C8C /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B94B3C6A1875337C009B0C8C /* CoreMotion.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,7 @@
 		64F5430B1695DF09009F9468 /* bgCalloutDisclosure@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgCalloutDisclosure@2x.png"; sourceTree = "<group>"; };
 		64F543181695E1ED009F9468 /* bgCallout.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bgCallout.png; sourceTree = "<group>"; };
 		64F543191695E1ED009F9468 /* bgCallout@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bgCallout@2x.png"; sourceTree = "<group>"; };
+		B94B3C6A1875337C009B0C8C /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +91,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B94B3C6B1875337C009B0C8C /* CoreMotion.framework in Frameworks */,
 				64F543041695C510009F9468 /* QuartzCore.framework in Frameworks */,
 				64F543021695C1D7009F9468 /* MapKit.framework in Frameworks */,
 				64F543001695C1A9009F9468 /* CoreLocation.framework in Frameworks */,
@@ -122,6 +125,7 @@
 		64F542BE1695C116009F9468 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B94B3C6A1875337C009B0C8C /* CoreMotion.framework */,
 				64F543031695C510009F9468 /* QuartzCore.framework */,
 				64F543011695C1D7009F9468 /* MapKit.framework */,
 				64F542FF1695C1A9009F9468 /* CoreLocation.framework */,

@@ -13,10 +13,11 @@
 #import <AVFoundation/AVFoundation.h>
 #import "Radar.h"
 #import "RadarViewPortView.h"
+#import <CoreMotion/CoreMotion.h>
 
 @class ARCoordinate;
 
-@interface AugmentedRealityController : NSObject <UIAccelerometerDelegate, CLLocationManagerDelegate> {
+@interface AugmentedRealityController : NSObject <CLLocationManagerDelegate> {
 	
 @private
 	double	latestHeading;
@@ -33,7 +34,6 @@
     AVCaptureSession            *captureSession;
     AVCaptureVideoPreviewLayer  *previewLayer;
     
-    UIAccelerometer             *accelerometerManager;
 	CLLocation                  *centerLocation;
 	UIView                      *displayView;
     UILabel                     *radarNorthLabel;
@@ -49,8 +49,8 @@
 
 @property (nonatomic, assign, setter = setShowsRadar:) BOOL showsRadar;
 
-@property (nonatomic, retain) UIAccelerometer           *accelerometerManager;
-@property (nonatomic, retain) CLLocationManager         *locationManager;
+@property (nonatomic, retain) CMMotionManager* motionManager;
+@property (nonatomic, retain) CLLocationManager* locationManager;
 @property (nonatomic, retain) ARCoordinate              *centerCoordinate;
 @property (nonatomic, retain) CLLocation                *centerLocation;
 @property (nonatomic, retain) UIView                    *displayView;

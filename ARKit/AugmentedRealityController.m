@@ -43,7 +43,7 @@
 @implementation AugmentedRealityController
 
 @synthesize locationManager;
-@synthesize accelerometerManager;
+@synthesize motionManager;
 @synthesize displayView;
 @synthesize cameraView;
 @synthesize rootViewController;
@@ -155,6 +155,41 @@
     [self setCameraView:camView];
     [self setDisplayView:displayV];
     
+    self.motionManager = [[CMMotionManager alloc] init];
+    // NSLog(@"%d, %d", self.motionManager.accelerometerActive, self.motionManager.accelerometerAvailable);
+    self.motionManager.accelerometerUpdateInterval = 1/60.0;
+    [self.motionManager startAccelerometerUpdatesToQueue:[NSOperationQueue currentQueue] withHandler:^(CMAccelerometerData *accelerometerData, NSError *error) {
+//        CMAcceleration accelData = accelerometerData.acceleration;
+
+  //      CLLocationCoordinate2D coord = self.locationManager.location.coordinate;
+        
+    //    CLLocationDirection heading = self.locationManager.heading.magneticHeading;
+      //  CLLocationDistance altitude = self.locationManager.location.altitude;
+        
+        switch (cameraOrientation) {
+            case UIDeviceOrientationLandscapeLeft:
+                viewAngle = atan2(accelerometerData.acceleration.x, accelerometerData.acceleration.z);
+                break;
+            case UIDeviceOrientationLandscapeRight:
+                viewAngle = atan2(-accelerometerData.acceleration.x, accelerometerData.acceleration.z);
+                break;
+            case UIDeviceOrientationPortrait:
+                viewAngle = atan2(accelerometerData.acceleration.y, accelerometerData.acceleration.z);
+                break;
+            case UIDeviceOrientationPortraitUpsideDown:
+                viewAngle = atan2(-accelerometerData.acceleration.y, accelerometerData.acceleration.z);
+                break;	
+            default:
+                break;
+        }
+
+    }];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    [self.locationManager startUpdatingHeading];
+    [self.locationManager startUpdatingLocation];
+	// Do any additional setup after loading the view, typically from a nib.
     
   	return self;
 }
@@ -214,7 +249,7 @@
     [self unloadAV];
 	[[UIDevice currentDevice] endGeneratingDeviceOrientationNotifications];
     locationManager.delegate = nil;
-    [UIAccelerometer sharedAccelerometer].delegate = nil;
+
 }
 
 #pragma mark -	
@@ -234,12 +269,12 @@
         
         [self setLocationManager: newLocationManager];
 	}
+    
+    if (![self motionManager])
+    {
+//        [self.motionManager ]
+    }
 			
-	if (![self accelerometerManager]) {
-		[self setAccelerometerManager: [UIAccelerometer sharedAccelerometer]];
-		[[self accelerometerManager] setUpdateInterval: INTERVAL_UPDATE];
-		[[self accelerometerManager] setDelegate: self];
-	}
 	
 	if (![self centerCoordinate]) 
 		[self setCenterCoordinate:[ARCoordinate coordinateWithRadialDistance:1.0 inclination:0 azimuth:0]];
@@ -253,9 +288,9 @@
        [[self locationManager] setDelegate: nil];
     }
     
-    if ([self accelerometerManager]) {
-       [[self accelerometerManager] setDelegate: nil];
-    }
+//    if ([self accelerometerManager]) {
+//       [[self accelerometerManager] setDelegate: nil];
+//    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateHeading:(CLHeading *)newHeading {
@@ -337,26 +372,6 @@
 			if ([geoLocation radialDistance] > [self maximumScaleDistance]) 
 				[self setMaximumScaleDistance:[geoLocation radialDistance]];
 		}
-	}
-}
-
-- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:(UIAcceleration *)acceleration {
-	
-	switch (cameraOrientation) {
-		case UIDeviceOrientationLandscapeLeft:
-			viewAngle = atan2(acceleration.x, acceleration.z);
-			break;
-		case UIDeviceOrientationLandscapeRight:
-			viewAngle = atan2(-acceleration.x, acceleration.z);
-			break;
-		case UIDeviceOrientationPortrait:
-			viewAngle = atan2(acceleration.y, acceleration.z);
-			break;
-		case UIDeviceOrientationPortraitUpsideDown:
-			viewAngle = atan2(-acceleration.y, acceleration.z);
-			break;	
-		default:
-			break;
 	}
 }
 
