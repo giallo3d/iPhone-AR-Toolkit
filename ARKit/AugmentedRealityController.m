@@ -212,14 +212,16 @@
     if(_showsRadar){
         
         CGRect displayFrame = [[[self rootViewController] view] frame];
+
+        int radarSize = 2 * RADIUS + 1;
+        int margin = 4;
+        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
+        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
         
-        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - 63, 2, 61, 61)];
-        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - 63, 2, 61, 61)];
-        
-        radarNorthLabel = [[UILabel alloc] initWithFrame:CGRectMake(displayFrame.size.width - 37, 2, 10, 10)];
+        radarNorthLabel = [[UILabel alloc] initWithFrame:CGRectMake(displayFrame.size.width - RADIUS - 11, margin + 3, 10, 10)];
         radarNorthLabel.backgroundColor = [UIColor clearColor];
         radarNorthLabel.textColor = [UIColor whiteColor];
-        radarNorthLabel.font = [UIFont boldSystemFontOfSize:8.0];
+        radarNorthLabel.font = [UIFont boldSystemFontOfSize:10.0];
         radarNorthLabel.textAlignment = NSTextAlignmentCenter;
         radarNorthLabel.text = @"N";
         radarNorthLabel.alpha = 0.8;
