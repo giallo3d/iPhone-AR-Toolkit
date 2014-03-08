@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "ARGeoCoordinate.h"
 
-#define RADIUS 30.0
+#define RADIUS 60.0
 
 @interface Radar : UIView
 

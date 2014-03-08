@@ -78,7 +78,7 @@
     if(_showsCloseButton == YES) {
         UIButton *closeBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 60, 30)];
         
-        [closeBtn setTitle:@"Close" forState:UIControlStateNormal];
+        [closeBtn setTitle:NSLocalizedString(@"Close", @"Close") forState:UIControlStateNormal];
         [closeBtn.titleLabel setFont:[UIFont boldSystemFontOfSize:13.0]];
         [closeBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [closeBtn.titleLabel setShadowColor:[UIColor colorWithWhite:0.1 alpha:1.0]];

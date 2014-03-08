@@ -610,9 +610,11 @@
     //Last but not least we need to move the radar if we are displaying one
     if(_radarViewPort && _radarView)
     {
-        [radarNorthLabel setFrame:CGRectMake(newFrame.size.width - 37, 2, 10, 10)];
-        [_radarView setFrame:CGRectMake(newFrame.size.width - 63, 2, 61, 61)];
-        [_radarViewPort setFrame:CGRectMake(newFrame.size.width - 63, 2, 61, 61)];
+        int radarSize = 2 * RADIUS + 1;
+        int margin = 4;
+        [radarNorthLabel setFrame:CGRectMake(newFrame.size.width - RADIUS - 11, margin + 3, 10, 10)];
+        [_radarView setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
+        [_radarViewPort setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
     }
 }
 @end
