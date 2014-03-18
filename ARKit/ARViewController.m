@@ -61,6 +61,10 @@
     
     [self.view setAutoresizesSubviews:YES];
     
+    stillImageOutput = [[AVCaptureStillImageOutput alloc] init];
+    NSDictionary *outputSettings = [[NSDictionary alloc] initWithObjectsAndKeys: AVVideoCodecJPEG, AVVideoCodecKey, nil];
+    [stillImageOutput setOutputSettings:outputSettings];
+    [_agController.captureSession addOutput:stillImageOutput];
     
  	return self;
 }
@@ -119,6 +123,33 @@
     */
 }
 
+- (void)takeSnapshotAsynch
+{
+    [stillImageOutput captureStillImageAsynchronouslyFromConnection:[stillImageOutput.connections objectAtIndex:0] completionHandler:^(CMSampleBufferRef imageDataSampleBuffer, NSError *error)
+     {
+         if (error == nil)
+         {
+             NSData* imageData = [AVCaptureStillImageOutput jpegStillImageNSDataRepresentation:imageDataSampleBuffer];
+             UIImage* cameraImg = [UIImage imageWithData:imageData];
+             
+             UIGraphicsBeginImageContext(self.view.bounds.size);
+             //CGContextRef c = UIGraphicsGetCurrentContext();
+             
+             // Rendering camera snapshot
+             [cameraImg drawInRect:self.view.bounds];
+             
+             UIImage *snapshotImage = UIGraphicsGetImageFromCurrentImageContext();
+             UIGraphicsEndImageContext();
+             
+             [delegate didFinishSnapshotGeneration:snapshotImage error:nil];
+         }
+         else
+         {
+             [delegate didFinishSnapshotGeneration:nil error:error];
+         }
+     }];
+}
+
 #pragma mark - Custom Setters
 - (void)setDebugMode:(BOOL)debugMode{
     _debugMode = debugMode;
@@ -171,7 +202,9 @@
 }
 
 
+
 #pragma mark - View Cleanup
+
 - (void)didReceiveMemoryWarning {
 	// Releases the view if it doesn't have a superview.
     [super didReceiveMemoryWarning];

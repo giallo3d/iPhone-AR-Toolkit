@@ -80,5 +80,4 @@
 - (void)removeCoordinate:(ARGeoCoordinate *)coordinate;
 - (void)removeCoordinates:(NSArray *)coordinateArray;
 
-
 @end

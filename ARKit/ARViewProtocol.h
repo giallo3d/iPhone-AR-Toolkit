@@ -19,5 +19,4 @@
 - (void)didUpdateHeading:(CLHeading *)newHeading;
 - (void)didUpdateLocation:(CLLocation *)newLocation;
 - (void)didUpdateOrientation:(UIDeviceOrientation)orientation;
-
 @end

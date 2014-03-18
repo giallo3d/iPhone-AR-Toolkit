@@ -9,10 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "ARLocationDelegate.h"
 #import "ARViewProtocol.h"
+#import <AVFoundation/AVFoundation.h>
 
 @class AugmentedRealityController;
 
 @interface ARViewController : UIViewController<ARMarkerDelegate, ARDelegate>
+{
+    AVCaptureStillImageOutput   *stillImageOutput;
+}
 
 @property (nonatomic, assign) id<ARLocationDelegate> delegate;
 @property (assign, nonatomic) BOOL showsCloseButton;
@@ -27,8 +31,9 @@
 @property (strong, nonatomic, setter = setRadarViewportColour:)             UIColor *radarViewportColour;
 @property (assign, nonatomic, setter = setRadarRange:)                      float radarRange;
 @property (assign, nonatomic, setter = setOnlyShowItemsWithinRadarRange:)   BOOL onlyShowItemsWithinRadarRange;
+//@property (readonly, nonatomic)                                             AVCaptureSession* captureSession;
 
 - (id)initWithDelegate:(id<ARLocationDelegate>)aDelegate;
-
+- (void)takeSnapshotAsynch;
 @end
 

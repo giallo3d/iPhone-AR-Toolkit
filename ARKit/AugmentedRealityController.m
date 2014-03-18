@@ -211,8 +211,8 @@
     
     if(_showsRadar){
         
-        CGRect displayFrame = [[[self rootViewController] view] frame];
-
+        CGRect displayFrame = displayView.bounds;
+        
         int radarSize = 2 * RADIUS + 1;
         int margin = 4;
         _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
@@ -619,4 +619,5 @@
         [_radarViewPort setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
     }
 }
+
 @end
