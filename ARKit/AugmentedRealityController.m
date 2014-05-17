@@ -68,7 +68,7 @@
     
     [self setDelegate:aDelegate];
 
-    latestHeading   = HEADING_NOT_SET;
+    latestHeading   = degreesToRadian(270);
     prevHeading     = HEADING_NOT_SET;
     
 	[self setRootViewController: vc];
@@ -469,8 +469,12 @@
 	else
 		point.x = (realityBounds.size.width / 2) - ((deltaAzimith / degreesToRadian(1)) * ADJUST_BY);	// Left side of Azimuth
 	
-	point.y = (realityBounds.size.height / 2) + (radianToDegrees(M_PI_2 + viewAngle)  * 2.0);
-  	
+    float radialDistanceKm = coordinate.radialDistance / 1000;
+    float yFactor = radialDistanceKm / self.radarRange;
+    float ySpan = realityBounds.size.height / 5;
+	//point.y = (realityBounds.size.height / 2) + (radianToDegrees(M_PI_2 + viewAngle)  * 2.0);
+  	point.y = (realityBounds.size.height / 2) - (ySpan / 2) + yFactor * ySpan;
+    
 	return point;
 }
 
