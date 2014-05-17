@@ -68,7 +68,7 @@
     
     [self setDelegate:aDelegate];
 
-    latestHeading   = degreesToRadian(270);
+    latestHeading   = HEADING_NOT_SET;
     prevHeading     = HEADING_NOT_SET;
     
 	[self setRootViewController: vc];
