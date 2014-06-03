@@ -471,9 +471,9 @@
 	
     float radialDistanceKm = coordinate.radialDistance / 1000;
     float yFactor = radialDistanceKm / self.radarRange;
-    float ySpan = realityBounds.size.height / 3;
+    float ySpan = realityBounds.size.height / 4;
 	//point.y = (realityBounds.size.height / 2) + (radianToDegrees(M_PI_2 + viewAngle)  * 2.0);
-  	point.y = (realityBounds.size.height / 2) - (ySpan / 2) + yFactor * ySpan;
+  	point.y = (realityBounds.size.height / 2) - yFactor * ySpan;
     
 	return point;
 }
