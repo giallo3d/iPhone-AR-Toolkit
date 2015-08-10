@@ -28,6 +28,8 @@
 #define HEADING_NOT_SET -1.0
 #define DEGREE_TO_UPDATE 1
 
+#define RADAR_TOP_MARGIN 30
+
 
 @interface AugmentedRealityController (Private)
 - (void) updateCenterCoordinate;
@@ -215,9 +217,8 @@
         
         int radarSize = 2 * RADIUS + 1;
         int margin = 4;
-        int marginTop = 30;
-        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin+marginTop, radarSize, radarSize)];
-        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin+marginTop, radarSize, radarSize)];
+        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin + RADAR_TOP_MARGIN, radarSize, radarSize)];
+        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin + RADAR_TOP_MARGIN, radarSize, radarSize)];
         
         radarNorthLabel = [[UILabel alloc] initWithFrame:CGRectMake(displayFrame.size.width - RADIUS - 11, margin + 3, 10, 10)];
         radarNorthLabel.backgroundColor = [UIColor clearColor];
@@ -619,9 +620,9 @@
     {
         int radarSize = 2 * RADIUS + 1;
         int margin = 4;
-        [radarNorthLabel setFrame:CGRectMake(newFrame.size.width - RADIUS - 11, margin + 3, 10, 10)];
-        [_radarView setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
-        [_radarViewPort setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
+        [radarNorthLabel setFrame:CGRectMake(newFrame.size.width - RADIUS - 11, margin + RADAR_TOP_MARGIN + 3, 10, 10)];
+        [_radarView setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin + RADAR_TOP_MARGIN, radarSize, radarSize)];
+        [_radarViewPort setFrame:CGRectMake(newFrame.size.width - radarSize - margin, margin + RADAR_TOP_MARGIN, radarSize, radarSize)];
     }
 }
 
