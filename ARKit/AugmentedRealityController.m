@@ -85,12 +85,7 @@
 	
 	CGRect screenRect = [[UIScreen mainScreen] bounds];
     
-    if (cameraOrientation == UIDeviceOrientationLandscapeLeft || cameraOrientation == UIDeviceOrientationLandscapeRight) {
-        screenRect.size.width  = [[UIScreen mainScreen] bounds].size.height;
-        screenRect.size.height = [[UIScreen mainScreen] bounds].size.width;
-    }
-    
-	UIView *camView = [[UIView alloc] initWithFrame:screenRect];
+    UIView *camView = [[UIView alloc] initWithFrame:screenRect];
     UIView *displayV= [[UIView alloc] initWithFrame:screenRect];
     
     [displayV setAutoresizesSubviews:YES];
@@ -313,10 +308,12 @@
         int gradToRotate = newHeading.magneticHeading - 90 - 22.5;
         if ([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeLeft) {
             gradToRotate += 90;
-        }
-        if([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight){
+        } else if([[UIDevice currentDevice] orientation] == UIDeviceOrientationLandscapeRight){
             gradToRotate -= 90;
+        } else if([[UIDevice currentDevice] orientation] == UIDeviceOrientationPortraitUpsideDown){
+            gradToRotate -= 180;
         }
+
         if (gradToRotate < 0) {
             gradToRotate = 360 + gradToRotate;
         }
