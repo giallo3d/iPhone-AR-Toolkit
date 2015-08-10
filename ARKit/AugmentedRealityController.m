@@ -215,8 +215,9 @@
         
         int radarSize = 2 * RADIUS + 1;
         int margin = 4;
-        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
-        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin, radarSize, radarSize)];
+        int marginTop = 30;
+        _radarView       = [[Radar alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin+marginTop, radarSize, radarSize)];
+        _radarViewPort   = [[RadarViewPortView alloc] initWithFrame:CGRectMake(displayFrame.size.width - radarSize - margin, margin+marginTop, radarSize, radarSize)];
         
         radarNorthLabel = [[UILabel alloc] initWithFrame:CGRectMake(displayFrame.size.width - RADIUS - 11, margin + 3, 10, 10)];
         radarNorthLabel.backgroundColor = [UIColor clearColor];
