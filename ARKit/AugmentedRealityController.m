@@ -595,18 +595,6 @@
 	
     CGRect newFrame = [[UIScreen mainScreen] bounds];
     
-    switch (orientation) {
-        case UIDeviceOrientationLandscapeLeft:
-        case UIDeviceOrientationLandscapeRight:
-            newFrame.size.width     = [[UIScreen mainScreen] applicationFrame].size.height;
-            newFrame.size.height    = [[UIScreen mainScreen] applicationFrame].size.width;
-            break;
-        case UIDeviceOrientationPortraitUpsideDown:
-            break;
-        default:
-            break;
-    }
-    
     [previewLayer setFrame:[self.cameraView bounds]];
     
     if ([previewLayer.connection isVideoOrientationSupported]) {
